@@ -22,19 +22,8 @@ COPY . ${APP_DIR}
 RUN apt-get install -y supervisor nano
 RUN mkdir -p /var/log/supervisord/
 COPY deploy/supervisor/*.conf /etc/supervisor/conf.d/
-RUN ls -la  /etc/supervisor/conf.d/
+# RUN ls -la  /etc/supervisor/conf.d/
 RUN mv /etc/supervisor/conf.d/supervisord.conf /etc/supervisor/
 RUN mkdir -p /var/log/celery/
 
-# RUN systemctl enable supervisor
-# RUN service supervisor start
-# RUN supervisorctl status all
-
-# RUN /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
-# ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 CMD ["/usr/bin/supervisord"]
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
-# ENTRYPOINT [ "/bin/bash" ]
-
-# COPY deploy/start_supervisor.sh ${APP_DIR}/
-# CMD ${APP_DIR}/start_supervisor.sh
